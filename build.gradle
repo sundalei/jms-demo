@@ -17,6 +17,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-activemq'
+
+	implementation 'com.thoughtworks.xstream:xstream:1.4.19'
+	implementation 'org.springframework:spring-oxm:5.3.22'
+	
 	implementation 'org.apache.activemq:activemq-broker'
 	implementation 'org.webjars:jquery:3.6.0'
 	implementation 'org.webjars:bootstrap:5.1.3'
