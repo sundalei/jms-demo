@@ -1,0 +1,88 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <title>book store</title>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        About
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Book Order Form</h3>
+    </div>
+    <div class="jumbotron row">
+        <div class="col-lg-6">
+            <img th:src="@{/images/random_books.png}" style="width: 350px;" class="rounded"
+                 alt="picture of random books"/>
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-3">Your Books Galore </h1>
+            <p class="lead">Place book orders here to warehouse for shipping</p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="row marketing">
+            <div class="col-lg-12">
+
+                <div id="jmsMessageAlert" class="alert alert-success hide">
+                    <strong>Success!</strong> <span id="message"></span>
+                </div>
+                <h4>Customer Id</h4>
+                <div class="input-group">
+                    <label for="customerId"></label><select class="form-control" id="customerId">
+                        <option th:each="customer : ${customers}" th:value="${customer.customerId}"
+                                th:text="${customer.customerId} + ' - ' + ${customer.fullName}"></option>
+                    </select>
+                </div>
+                <br/>
+                <h4>Books</h4>
+                <label for="bookId"></label><select class="form-control" id="bookId">
+                    <option th:each="book : ${books}" th:value="${book.bookId}"
+                            th:text="${book.bookId} + ' - ' + ${book.title}"></option>
+                </select>
+                <br/>
+                <button class="btn btn-primary" id="addToOrderId" onclick="processOrder();" type="button">Add to Order</button>
+                <footer class="footer">
+                    <p>&copy; Your Books Galore 2022</p>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function processOrder() {
+        var randomOrderId = Math.floor(Math.random() * 100000);
+        var bookId = $('#bookId').val();
+        var customerId = $('#customerId').val();
+
+        jQuery.get("/process/order/" + randomOrderId + '/' + customerId + '/' + bookId + '/', function (data, status) {
+            $("#jmsMessageAlert").removeClass('hide');
+            $("#jmsMessageAlert span").text(data);
+        });
+    }
+</script>
+
+</body>
+</html>
