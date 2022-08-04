@@ -4,7 +4,6 @@ import com.mdrsolutions.jmsdemo.pojos.Book;
 import com.mdrsolutions.jmsdemo.pojos.BookOrder;
 import com.mdrsolutions.jmsdemo.pojos.Customer;
 import com.thoughtworks.xstream.security.ExplicitTypePermission;
-import com.thoughtworks.xstream.security.TypePermission;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
