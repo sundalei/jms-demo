@@ -21,4 +21,12 @@ public class Customer {
     public String getFullName() {
         return fullName;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", fullName=" + fullName +
+                "}";
+    }
 }
