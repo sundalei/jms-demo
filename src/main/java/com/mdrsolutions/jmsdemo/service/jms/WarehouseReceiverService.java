@@ -11,9 +11,16 @@ public class WarehouseReceiverService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WarehouseReceiverService.class);
 
+    private final WarehouseProcessingService warehouseProcessingService;
+
+    public WarehouseReceiverService(WarehouseProcessingService warehouseProcessingService) {
+        this.warehouseProcessingService = warehouseProcessingService;
+    }
+
     @JmsListener(destination = "book.order.queue")
     public void receive(BookOrder bookOrder) {
         LOGGER.info("received a message");
         LOGGER.info("Message is: " + bookOrder);
+        warehouseProcessingService.processOrder(bookOrder);
     }
 }
