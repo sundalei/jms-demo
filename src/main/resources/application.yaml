@@ -1,2 +1,12 @@
 server:
   port: 9090
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    packages:
+      trust-all: false
+      trusted: com.mdrsolutions.jmsdemo
+  jms:
+    pub-sub-domain: false

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.mdrsolutions.jmsdemo.pojos.BookOrder;
 import com.mdrsolutions.jmsdemo.pojos.ProcessedBookOrder;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class WarehouseProcessingService {
@@ -21,6 +22,7 @@ public class WarehouseProcessingService {
         this.jmsTemplate = jmsTemplate;
     }
 
+    @Transactional
     public void processOrder(BookOrder bookOrder) {
         ProcessedBookOrder order = new ProcessedBookOrder(bookOrder, new Date(), new Date());
         jmsTemplate.convertAndSend("book.order.processed.queue", order);

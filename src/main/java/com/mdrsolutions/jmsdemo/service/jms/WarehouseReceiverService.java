@@ -17,10 +17,14 @@ public class WarehouseReceiverService {
         this.warehouseProcessingService = warehouseProcessingService;
     }
 
-    @JmsListener(destination = "book.order.queue")
+    @JmsListener(destination = "book.order.queue", containerFactory = "defaultJmsListenerContainerFactory")
     public void receive(BookOrder bookOrder) {
         LOGGER.info("received a message");
         LOGGER.info("Message is: " + bookOrder);
+
+        if (bookOrder.getBook().getTitle().startsWith("L")) {
+            throw new RuntimeException("OrderId=" + bookOrder.getBookOrderId() + " begins with L and these books are not allowed.");
+        }
         warehouseProcessingService.processOrder(bookOrder);
     }
 }

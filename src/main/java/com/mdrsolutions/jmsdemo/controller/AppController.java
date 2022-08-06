@@ -21,7 +21,7 @@ import java.util.List;
 public class AppController {
 
     private final BookStoreOrderService bookStoreOrderService;
-    private final Logger logger = LoggerFactory.getLogger(AppController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(AppController.class);
 
     List<Book> books = Arrays.asList(
             new Book("jpw-1234", "Lord of the Flies"),
@@ -40,7 +40,7 @@ public class AppController {
     @RequestMapping("/")
     public String appHome(Model model) {
 
-        logger.info("AppController home");
+        LOGGER.info("AppController home");
 
         model.addAttribute("customers", customers);
         model.addAttribute("books", books);
@@ -52,9 +52,9 @@ public class AppController {
     public String processOrder(@PathVariable String orderId,
                                @PathVariable String customerId,
                                @PathVariable String bookId) {
-        logger.info("orderId: " + orderId);
-        logger.info("customerId: " + customerId);
-        logger.info("bookId: " + bookId);
+        LOGGER.info("orderId: " + orderId);
+        LOGGER.info("customerId: " + customerId);
+        LOGGER.info("bookId: " + bookId);
 
         try {
             bookStoreOrderService.send(build(customerId, bookId, orderId));
