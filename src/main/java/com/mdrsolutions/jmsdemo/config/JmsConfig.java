@@ -90,15 +90,15 @@ public class JmsConfig implements JmsListenerConfigurer {
 
     @Override
     public void configureJmsListeners(JmsListenerEndpointRegistrar registrar) {
-        SimpleJmsListenerEndpoint endpoint = new SimpleJmsListenerEndpoint();
-        endpoint.setMessageListener(jmsMessageListener());
-        endpoint.setDestination("book.order.processed.queue");
-        endpoint.setId("book-order-processed-queue");
-        endpoint.setSubscription("my-subscription");
-        endpoint.setConcurrency("1");
+        // SimpleJmsListenerEndpoint endpoint = new SimpleJmsListenerEndpoint();
+        // endpoint.setMessageListener(jmsMessageListener());
+        // endpoint.setDestination("book.order.processed.queue");
+        // endpoint.setId("book-order-processed-queue");
+        // endpoint.setSubscription("my-subscription");
+        // endpoint.setConcurrency("1");
 
-        registrar.setContainerFactory(defaultJmsListenerContainerFactory());
-        registrar.registerEndpoint(endpoint, defaultJmsListenerContainerFactory());
+        // registrar.setContainerFactory(defaultJmsListenerContainerFactory());
+        // registrar.registerEndpoint(endpoint, defaultJmsListenerContainerFactory());
         
     }
 }
