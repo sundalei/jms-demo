@@ -47,17 +47,21 @@ public class AppController {
         return "index";
     }
 
-    @RequestMapping(path = "/process/order/{orderId}/{customerId}/{bookId}/", method = RequestMethod.GET)
+    @RequestMapping(path = "/process/store/{storeId}/order/{orderId}/{customerId}/{bookId}/{orderState}/", method = RequestMethod.GET)
     @ResponseBody
-    public String processOrder(@PathVariable String orderId,
+    public String processOrder(@PathVariable String storeId,
+                               @PathVariable String orderId,
                                @PathVariable String customerId,
-                               @PathVariable String bookId) {
+                               @PathVariable String bookId,
+                               @PathVariable String orderState) {
+        LOGGER.info("storeId: " + storeId);
         LOGGER.info("orderId: " + orderId);
         LOGGER.info("customerId: " + customerId);
         LOGGER.info("bookId: " + bookId);
+        LOGGER.info("orderState: " + orderState);
 
         try {
-            bookStoreOrderService.send(build(customerId, bookId, orderId));
+            bookStoreOrderService.send(build(customerId, bookId, orderId), storeId, orderState);
         } catch (Exception exception) {
             return "Error occurred!" + exception.getLocalizedMessage();
         }

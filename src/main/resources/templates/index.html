@@ -61,6 +61,13 @@
                             th:text="${book.bookId} + ' - ' + ${book.title}"></option>
                 </select>
                 <br/>
+                <h4>Order Status</h4>
+                <label for="orderStateId"><select class="form-control" id="orderStateId">
+                    <option value="NEW">NEW</option>
+                    <option value="UPDATE">UPDATE</option>
+                    <option value="DELETE">CANCEL</option>
+                </select>
+                <br/>
                 <button class="btn btn-primary" id="addToOrderId" onclick="processOrder();" type="button">Add to Order</button>
                 <footer class="footer">
                     <p>&copy; Your Books Galore 2022</p>
@@ -73,11 +80,13 @@
 
 <script>
     function processOrder() {
+        var randomStoreId = Math.floor(Math.random() * 100000);
         var randomOrderId = Math.floor(Math.random() * 100000);
         var bookId = $('#bookId').val();
         var customerId = $('#customerId').val();
+        var orderStateId = $('#orderStateId').val();
 
-        jQuery.get("/process/order/" + randomOrderId + '/' + customerId + '/' + bookId + '/', function (data, status) {
+        jQuery.get("/process/store/" + randomStoreId + "/order/" + randomOrderId + '/' + customerId + '/' + bookId + '/' + orderStateId + '/', function (data, status) {
             $("#jmsMessageAlert").removeClass('hide');
             $("#jmsMessageAlert span").text(data);
         });

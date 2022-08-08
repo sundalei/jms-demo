@@ -17,7 +17,13 @@ public class BookStoreOrderService {
     }
 
     @Transactional
-    public void send(BookOrder bookOrder) {
-        jmsTemplate.convertAndSend(BOOK_QUEUE, bookOrder);
+    public void send(BookOrder bookOrder, String storeId, String orderState) {
+        jmsTemplate.convertAndSend(BOOK_QUEUE, bookOrder, message -> {
+
+            message.setStringProperty("bookOrderId", bookOrder.getBookOrderId());
+            message.setStringProperty("storeId", storeId);
+            message.setStringProperty("orderState", orderState);
+            return message;
+        });
     }
 }
